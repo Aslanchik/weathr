@@ -1,7 +1,8 @@
 import React from 'react';
 import {Card} from "semantic-ui-react"
 
-const WeatherCard = () => {
+const WeatherCard = (props) => {
+    console.log(props);
     return ( 
         <Card fluid>
             <Card.Header>

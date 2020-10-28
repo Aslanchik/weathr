@@ -1,21 +1,32 @@
-import React, { createContext, useEffect, useReducer, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 
-import { fetchWeather } from "../services/weatherSer";
+import { weatherReducer } from "../reducers/weatherReducer";
 
 export const WeatherContext = createContext();
 
 const WeatherContextProvider = (props) => {
   const [query, setQuery] = useState("");
-  const [defaultCities, setDefaultCities] = useState(["new york", "netanya"]);
-  const [defaultCitiesWeather, setDefaultCitiesWeather] = useState([]);
+  /* const [defaultCities, dispatch] = useState(
+    weatherReducer,
+    ["new york", "netanya"],
+    () => {
+      if (localStorage.getItem("defaultCities")) {
+        const storedDefaultCities = localStorage.getItem("defaultCities");
+        return storedDefaultCities;
+      } else {
+        return ["new york", "netanya"];
+      }
+    }
+  ); */
 
-  useEffect(() => {
-    defaultCities.forEach(async (city) => {
-      await fetchWeather(city).then(({ data }) =>
-        setDefaultCitiesWeather([...defaultCitiesWeather, data])
-      );
-    });
-  }, [defaultCities, defaultCitiesWeather]);
+  /* useEffect(() => {
+    const storedDefaultCities = localStorage.getItem("defaultCities");
+    if (!storedDefaultCities) {
+      localStorage.setItem("defaultCities", defaultCities);
+    } else {
+
+    }
+  }, [defaultCities]); */
 
   return (
     <WeatherContext.Provider value={{ query, setQuery }}>
