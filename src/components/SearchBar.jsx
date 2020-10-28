@@ -1,10 +1,8 @@
-import React, { useContext } from 'react';
+import React from 'react';
 
 import {Input} from "semantic-ui-react";
-import { WeatherContext } from '../context/weatherContext';
 
-const SearchBar = () => {
-  const {setQuery} = useContext(WeatherContext);
+const SearchBar = ({setQuery}) => {
   
     return ( <>
     <Input

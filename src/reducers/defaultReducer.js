@@ -1,9 +1,5 @@
-/* export const weatherReducer = (state, action) => {
+export const defaultReducer = (state, action) => {
   switch (action.type) {
-    case "FETCH_DEFAULT_SUCC":
-      return [...state, action.payload];
-    case "FETCH_DEFAULT_FAIL":
-      return state;
     case "ADD_DEFAULT":
       state.unshift(action.payload);
       return state;
@@ -15,4 +11,3 @@
       return state;
   }
 };
- */

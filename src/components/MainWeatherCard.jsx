@@ -1,16 +1,14 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, { useState,  useEffect} from 'react';
 
 import WeatherCard from "./WeatherCard"
-import {WeatherContext} from "../context/weatherContext";
 import {fetchWeather} from "../services/weatherSer";
 
-const MainWeatherCard = () => {
-    const {query} = useContext(WeatherContext);
+const MainWeatherCard = ({query, defaultDispatch}) => {
     const [cityWeather, setCityWeather] = useState({});
 
-    /* useEffect(()=>{
+    useEffect(()=>{
         fetchWeather(query).then(({data})=> setCityWeather(data));
-    }, [query]); */
+    }, [query]);
 
     return cityWeather ? <WeatherCard cityWeather={cityWeather}/> : null;
 }
