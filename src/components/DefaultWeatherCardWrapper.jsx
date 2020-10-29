@@ -10,11 +10,18 @@ const DefaultWeatherCardWrapper = ({defaultCities, defaultDispatch}) => {
     const [defaultCitiesWeather, setDefaultCitiesWeather] = useState([]);
 
     useEffect(()=>{
-        defaultCities.forEach((city)=>{
-            fetchWeather(city).then(({data})=> {
-                setDefaultCitiesWeather((defaultCitiesWeather)=>[...defaultCitiesWeather, data]);
-            });
-        })
+        // This will run once and then every 60 seconds to get the most recent data
+        const fetchDefaultCitiesWeather=()=>{
+            // Clear old weather data to avoid double rendering
+            setDefaultCitiesWeather([]);
+            defaultCities.forEach((city)=>{
+                fetchWeather(city).then(({data})=> {
+                    setDefaultCitiesWeather((defaultCitiesWeather)=>[...defaultCitiesWeather, data]);
+                });
+            })
+            setTimeout(fetchDefaultCitiesWeather, 60000);
+    }
+        fetchDefaultCitiesWeather();
     }, [defaultCities])
 
 
@@ -23,7 +30,7 @@ const DefaultWeatherCardWrapper = ({defaultCities, defaultDispatch}) => {
                         <Grid.Column width={6} key={i}>
                             <WeatherCard cityWeather={cityWeather} defaultDispatch={defaultDispatch}/>
                         </Grid.Column>
-        )): <div className="defaultSpinner"><Spinner size="huge" content="Fetching Data"/></div>
+        )): <div className="defaultSpinner"><Spinner size="huge" content="Fetching Updated Weather Data"/></div>
      );
 }
  
