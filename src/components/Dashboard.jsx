@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import {Container, Grid, Transition} from "semantic-ui-react";
+import {Container, Grid} from "semantic-ui-react";
 
 import SearchBar from "./SearchBar";
 import {WeatherContext} from "../context/weatherContext";
@@ -7,11 +7,11 @@ import MainWeatherCard from './MainWeatherCard';
 import DefaultWeatherCardWrapper from './DefaultWeatherCardWrapper';
 
 const Dashboard = () => {
-    const {defaultCities, defaultDispatch, query, setQuery, fetching ,setFetching} = useContext(WeatherContext);
+    const {defaultLocations, defaultDispatch, query, setQuery, fetching ,setFetching} = useContext(WeatherContext);
 
     return ( <>
     <Container >
-        <Grid columns={"equal"} className="dashBoardWrapper"
+        <Grid columns={"equal"} doubling className="dashBoardWrapper"
         >
             <Grid.Row centered>
                 <h1 className="dashHeader">
@@ -27,7 +27,7 @@ const Dashboard = () => {
                 </Grid.Column>
             </Grid.Row>
             <Grid.Row centered>
-                    <Grid.Column width={8} className={fetching ? 'mainWeatherCard': ''}>
+                    <Grid.Column largeScreen={8} widescreen={10} computer={8} tablet={8} mobile={12} className={fetching ? 'mainWeatherCard': ''}>
                 
                 <MainWeatherCard query={query} defaultDispatch={defaultDispatch} fetching={fetching} setFetching={setFetching}/> 
                     
@@ -37,7 +37,7 @@ const Dashboard = () => {
                 <h2 className="defaultTitle">Default Locations</h2>
             </Grid.Row>
             <Grid.Row centered>
-    <DefaultWeatherCardWrapper defaultCities={defaultCities} defaultDispatch={defaultDispatch}/>
+    <DefaultWeatherCardWrapper defaultLocations={defaultLocations} defaultDispatch={defaultDispatch}/>
             </Grid.Row>
         </Grid>
     </Container></> );

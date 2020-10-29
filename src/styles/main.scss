@@ -3,6 +3,7 @@
 @import "semantic-ui-css/semantic.min.css";
 @import "./card.scss";
 @import "./defaultWeather.scss";
+@import "./mediaQueries.scss";
 
 body {
   box-sizing: border-box;
@@ -13,7 +14,6 @@ body {
 }
 
 .dashBoardWrapper {
-  margin-top: -35px !important;
   margin-bottom: 100px !important;
   .dashHeader {
     font-size: 15em;
@@ -39,4 +39,18 @@ body {
 }
 .mainWeatherCard {
   height: 300px;
+}
+
+.mobileMisc {
+  display: none !important;
+  .accordTitle {
+    color: rgb(59, 155, 196) !important;
+    &:hover {
+      opacity: 0.75;
+    }
+  }
+}
+
+.mobileMisc {
+  display: block;
 }

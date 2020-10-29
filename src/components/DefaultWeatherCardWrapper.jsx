@@ -6,29 +6,33 @@ import Spinner from '../util/Spinner';
 import WeatherCard from "./WeatherCard";
 
 
-const DefaultWeatherCardWrapper = ({defaultCities, defaultDispatch}) => {
-    const [defaultCitiesWeather, setDefaultCitiesWeather] = useState([]);
+const DefaultWeatherCardWrapper = ({defaultLocations, defaultDispatch}) => {
+    const [defaultLocationsWeather, setDefaultLocationsWeather] = useState([]);
 
     useEffect(()=>{
         // This will run once and then every 60 seconds to get the most recent data
-        const fetchDefaultCitiesWeather=()=>{
+        const fetchDefaultLocationsWeather= async ()=>{
             // Clear old weather data to avoid double rendering
-            setDefaultCitiesWeather([]);
-            defaultCities.forEach((city)=>{
-                fetchWeather(city).then(({data})=> {
-                    setDefaultCitiesWeather((defaultCitiesWeather)=>[...defaultCitiesWeather, data]);
-                });
-            })
-            setTimeout(fetchDefaultCitiesWeather, 60000);
+            setDefaultLocationsWeather([]);
+            try{
+                await defaultLocations.forEach((location)=>{
+                    fetchWeather(location).then(({data})=> {
+                        setDefaultLocationsWeather((defaultLocationsWeather)=>[...defaultLocationsWeather, data]);
+                    });
+                })
+                setTimeout(fetchDefaultLocationsWeather, 60000);
+            }catch(error){
+                alert('Unexpected error, please try again later.')
+            }
     }
-        fetchDefaultCitiesWeather();
-    }, [defaultCities])
+        fetchDefaultLocationsWeather();
+    }, [defaultLocations])
 
 
     return (
-            defaultCitiesWeather.length === 2 ? defaultCitiesWeather.map((cityWeather, i)=> (
-                        <Grid.Column width={6} key={i}>
-                            <WeatherCard cityWeather={cityWeather} defaultDispatch={defaultDispatch}/>
+            defaultLocationsWeather.length !== 0 ? defaultLocationsWeather.map((locationWeather, i)=> (
+                        <Grid.Column widescreen={6} largeScreen={6} computer={8} tablet={8} mobile={12} key={i}>
+                            <WeatherCard locationWeather={locationWeather} defaultDispatch={defaultDispatch}/>
                         </Grid.Column>
         )): <div className="defaultSpinner"><Spinner size="huge" content="Fetching Updated Weather Data"/></div>
      );

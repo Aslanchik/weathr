@@ -7,28 +7,21 @@ export const WeatherContext = createContext();
 const WeatherContextProvider = (props) => {
   const [query, setQuery] = useState("");
   const [fetching, setFetching] = useState(false);
-  const [defaultCities, dispatch] = useReducer(defaultReducer, [], () => {
-    if (localStorage.getItem("defaultCities")) {
-      const storedDefaultCities = localStorage.getItem("defaultCities");
-      return storedDefaultCities;
+  const [defaultLocations, dispatch] = useReducer(defaultReducer, [], () => {
+    if (localStorage.getItem("defaultLocations")) {
+      const storedDefaultLocations = localStorage
+        .getItem("defaultLocations")
+        .split(",");
+      return storedDefaultLocations;
     } else return ["new york", "netanya"];
   });
-
-  /* useEffect(() => {
-    const storedDefaultCities = localStorage.getItem("defaultCities");
-    if (!storedDefaultCities) {
-      localStorage.setItem("defaultCities", defaultCities);
-    } else {
-
-    }
-  }, [defaultCities]); */
 
   return (
     <WeatherContext.Provider
       value={{
         query,
         setQuery,
-        defaultCities,
+        defaultLocations,
         defaultDispatch: dispatch,
         fetching,
         setFetching,

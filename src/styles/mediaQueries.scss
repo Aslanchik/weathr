@@ -1,0 +1,53 @@
+@media only screen and (max-width: 766px) {
+  .dashBoardWrapper {
+    .dashHeader {
+      font-size: 12em !important;
+    }
+  }
+}
+
+@media only screen and (max-width: 670px) {
+  .dashBoardWrapper {
+    .dashHeader {
+      font-size: 10em !important;
+    }
+    .defaultTitle {
+      font-size: 2em;
+    }
+  }
+}
+
+@media only screen and (max-width: 520px) {
+  .dashBoardWrapper {
+    .dashHeader {
+      font-size: 8em !important;
+    }
+    .defaultTitle {
+      font-size: 1.5em;
+    }
+    .mobileMisc {
+      display: block !important;
+    }
+    .desktopMisc {
+      display: none !important;
+    }
+    .ui.card {
+      .header {
+        justify-content: center;
+      }
+      text-align: center;
+      img {
+        float: none !important;
+        margin: auto auto;
+        display: block;
+      }
+    }
+  }
+}
+@media only screen and (max-width: 398px) {
+  .dashBoardWrapper {
+    .dashHeader {
+      font-size: 6em !important;
+    }
+  }
+}
