@@ -16,9 +16,8 @@ const WeatherCard = ({cityWeather, mainWeatherCard = false}) => {
             </div>
         )
     } */
-
-    console.log(cityWeather);
-    return cityWeather ? ( 
+    const renderWeatherCard = () =>{
+      return (
         <Card raised fluid color='yellow'>
       <Card.Content>
         <Image
@@ -82,7 +81,10 @@ const WeatherCard = ({cityWeather, mainWeatherCard = false}) => {
         </Button>
       </Card.Content>}
     </Card>
-     ): (<Spinner size="huge" content="Fetching Data"/>);
+      )
+    }
+
+    return cityWeather ? renderWeatherCard() : null;
 }
  
 export default WeatherCard;

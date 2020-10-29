@@ -12,25 +12,31 @@ body {
   color: $BLACK !important;
 }
 
-.dashHeader {
-  font-size: 15em;
-  font-family: "Ubuntu", sans-serif;
-  .dashTitle {
-    background: rgb(91, 192, 235);
-    background: linear-gradient(
-      163deg,
-      rgba(91, 192, 235, 1) 28%,
-      rgba(255, 255, 255, 1) 100%
-    );
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-  .sunDot {
-    color: #fdeb5f;
+.dashBoardWrapper {
+  margin-top: -35px !important;
+  margin-bottom: 100px !important;
+  .dashHeader {
+    font-size: 15em;
+    font-family: "Ubuntu", sans-serif;
+    .dashTitle {
+      background: rgb(91, 192, 235);
+      background: linear-gradient(
+        163deg,
+        rgba(91, 192, 235, 1) 28%,
+        rgba(255, 255, 255, 1) 100%
+      );
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .sunDot {
+      color: #fdeb5f;
+    }
   }
 }
-
 .button {
   background: $BLUE !important;
   color: $WHITE !important;
+}
+.mainWeatherCard {
+  height: 300px;
 }

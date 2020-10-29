@@ -6,6 +6,7 @@ export const WeatherContext = createContext();
 
 const WeatherContextProvider = (props) => {
   const [query, setQuery] = useState("");
+  const [fetching, setFetching] = useState(false);
   const [defaultCities, dispatch] = useReducer(defaultReducer, [], () => {
     if (localStorage.getItem("defaultCities")) {
       const storedDefaultCities = localStorage.getItem("defaultCities");
@@ -24,7 +25,14 @@ const WeatherContextProvider = (props) => {
 
   return (
     <WeatherContext.Provider
-      value={{ query, setQuery, defaultCities, defaultDispatch: dispatch }}
+      value={{
+        query,
+        setQuery,
+        defaultCities,
+        defaultDispatch: dispatch,
+        fetching,
+        setFetching,
+      }}
     >
       {props.children}
     </WeatherContext.Provider>

@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import {Form, Button, Icon} from "semantic-ui-react";
 
-const SearchBar = ({setQuery}) => {
+const SearchBar = ({setQuery, setFetching}) => {
   const [inputVal, setInputVal] = useState('');
   const [errors, setErrors] = useState([]);
   const queryInputRef = useRef(null);
@@ -12,17 +12,17 @@ const SearchBar = ({setQuery}) => {
     e.preventDefault();
     if(inputVal.trim === '') setErrors([...errors, 'Search value cannot be empty.']);
     if(!errors.length) {
+      setFetching(true);
       setQuery(inputVal);
       setInputVal('');
       queryInputRef.current.blur();
     }
-    
   }
     return ( <>
     <Form onSubmit={onSubmit}>
       <Form.Field>
         <div className="ui action right labeled input big">
-          <input placeholder="Search by city.." name="query" type="text" onChange={onChange} value={inputVal} ref={queryInputRef} />
+          <input placeholder="Search by location.." name="query" type="text" onChange={onChange} value={inputVal} ref={queryInputRef} />
         <Button animated disabled={inputVal === ''} type="submit">
           <Button.Content visible>
             <Icon name="search"/>

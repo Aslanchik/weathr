@@ -1,6 +1,16 @@
-.defaultWeatherCards {
-  display: flex;
-  flex-direction: column !important;
-  .cards {
-  }
+.defaultTitle {
+  font-family: "Ubuntu", sans-serif;
+  background: rgb(4, 129, 182);
+  font-size: 3em;
+  background: linear-gradient(
+    163deg,
+    rgba(4, 129, 182, 1) 0%,
+    rgba(128, 204, 236, 1) 100%
+  );
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.defaultSpinner {
+  margin-top: 100px;
 }
