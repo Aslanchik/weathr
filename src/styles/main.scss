@@ -1,15 +1,29 @@
 @import url("https://fonts.googleapis.com/css2?family=Ubuntu&display=swap");
-@import "semantic-ui-css/semantic.min.css";
 @import "./theme.scss";
+@import "semantic-ui-css/semantic.min.css";
+@import "./card.scss";
 
 body {
   box-sizing: border-box;
   min-height: 100%;
   font-family: "Ubuntu", sans-serif;
   background-color: $WHITE;
+  color: $BLACK !important;
 }
-
-h1 {
-  font-family: "Ubuntu", sans-serif;
+.dashHeader {
   font-size: 15em;
+  font-family: "Ubuntu", sans-serif;
+  .dashTitle {
+    background: rgb(91, 192, 235);
+    background: linear-gradient(
+      163deg,
+      rgba(91, 192, 235, 1) 28%,
+      rgba(255, 255, 255, 1) 100%
+    );
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .sunDot {
+    color: #fdeb5f;
+  }
 }

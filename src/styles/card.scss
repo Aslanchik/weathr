@@ -1,0 +1,25 @@
+.ui.fluid.raised.card {
+  .content {
+    .fieldIcon {
+      color: $BLUE;
+      opacity: 0.5;
+    }
+    .description {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      margin-bottom: 15px;
+      .miscField {
+        display: flex;
+        flex-direction: column;
+        .fieldTitle {
+          color: $GREEN;
+        }
+        .fieldBody {
+          color: $DARK_GREEN;
+          margin: 0 auto;
+        }
+      }
+    }
+  }
+}

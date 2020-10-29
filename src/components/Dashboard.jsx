@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import {Container, Grid, GridColumn} from "semantic-ui-react";
+import {Container, Grid} from "semantic-ui-react";
 
 import SearchBar from "./SearchBar";
 import WeatherCard from "./WeatherCard";
@@ -10,22 +10,24 @@ const Dashboard = () => {
     const {defaultCities, defaultDispatch, query, setQuery} = useContext(WeatherContext);
 
     return ( <><Container >
-        <Grid columns={1} className="dashboardWrapper"
+        <Grid columns={3} className="dashboardWrapper"
         >
             <Grid.Row>
-                <h1 className="dashTitle">Weathr.</h1>
+                <h1 className="dashHeader"><span className="dashTitle">Weathr</span><span className="sunDot">.</span></h1>
             </Grid.Row>
             <Grid.Row centered>
-                <GridColumn width={12}>
+                <Grid.Column width={12}>
         <SearchBar setQuery={setQuery}/>
-                </GridColumn>
+                </Grid.Column>
             </Grid.Row>
-            <Grid.Row>
+            <Grid.Row centered>
+                <Grid.Column width={8}>
                 <MainWeatherCard query={query} defaultDispatch={defaultDispatch}/>
+                </Grid.Column>
             </Grid.Row>
-            <Grid.Row>
+            <Grid.Row centered>
                 {defaultCities ? defaultCities.map((city, i)=> (
-                    <Grid.Column key={i}>
+                    <Grid.Column width={6} key={i}>
                         <WeatherCard city={city} defaultDispatch={defaultDispatch}/>
                     </Grid.Column>
     )) : null}
