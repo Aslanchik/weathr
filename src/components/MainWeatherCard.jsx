@@ -26,7 +26,7 @@ wind: '5  קמ"ש'
         
     }, [query]);
 
-    return cityWeather ? <WeatherCard cityWeather={example}/>: null;
+    return cityWeather ? <WeatherCard cityWeather={example} mainWeatherCard/>: null;
 }
  
 export default MainWeatherCard;

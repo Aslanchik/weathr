@@ -13,7 +13,7 @@ const Dashboard = () => {
         <Grid columns={3} className="dashboardWrapper"
         >
             <Grid.Row>
-                <h1 className="dashHeader"><span className="dashTitle">Weathr</span><span className="sunDot">.</span></h1>
+                <h1 className="dashHeader"><span className="dashTitle">weathr</span><span className="sunDot">.</span></h1>
             </Grid.Row>
             <Grid.Row centered>
                 <Grid.Column width={12}>

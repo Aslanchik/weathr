@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import {Card, Image, Button, Icon} from "semantic-ui-react"
+import {Card, Image, Button, Icon, Popup} from "semantic-ui-react"
 import Spinner from '../util/Spinner';
 
-const WeatherCard = ({cityWeather}) => {
+const WeatherCard = ({cityWeather, mainWeatherCard = false}) => {
     /* const {icon, tempC, tempF } = cityWeather; */
     const [celsius, setCelsius] = useState(true);
 
@@ -19,7 +19,7 @@ const WeatherCard = ({cityWeather}) => {
 
     console.log(cityWeather);
     return cityWeather ? ( 
-        <Card raised fluid color='teal'>
+        <Card raised fluid color='yellow'>
       <Card.Content>
         <Image
           floated='left'
@@ -27,17 +27,17 @@ const WeatherCard = ({cityWeather}) => {
         />
         <Card.Header>
             <h2>
-                {celsius ? cityWeather.tempC : cityWeather.tempF}
-                <span className="celsius">C</span>
-                <span className="fahrenheit">F</span>
+                <span className="tempValue">{celsius ? `${cityWeather.tempC}°` : `${cityWeather.tempF}°`}</span>
             </h2>
+                <Popup content="Celsius" trigger={<span className={`temp ${celsius ? 'active' : '' }`} onClick={()=> setCelsius(true)}>C</span>}/>
+                <Popup content="Fahrenheit" trigger={<span className={`temp ${celsius ? '' : 'active' }`} onClick={()=> setCelsius(false)}>F</span>}/>
         </Card.Header>
     <Card.Header>
-        <Icon name="location arrow" className="fieldIcon"/>
+        <Popup content="Location" trigger={<Icon name="location arrow" className="fieldIcon"/>}/>
         {cityWeather.location}
     </Card.Header>
     <Card.Meta>
-        <Icon name="clock" className="fieldIcon"/>
+        <Popup content="Last update" trigger={<Icon name="clock" className="fieldIcon"/>}/>
         {cityWeather.lastUpdated}
     </Card.Meta>
     <Card.Description>
@@ -62,16 +62,25 @@ const WeatherCard = ({cityWeather}) => {
         </Card.Description>
         
       </Card.Content>
-      <Card.Content extra>
-        <Button animated onClick={handleSaveCity}>
+      {mainWeatherCard ? (<Card.Content extra>
+        <Button className="saveBtn" animated fluid onClick={handleSaveCity}>
           <Button.Content visible>
             <Icon name="heart"/>
           </Button.Content>
           <Button.Content hidden>
-            Save 
+            Save city to default
           </Button.Content>
         </Button>
-      </Card.Content>
+      </Card.Content>): <Card.Content extra>
+        <Button className="removeBtn" animated fluid onClick={handleSaveCity}>
+          <Button.Content visible>
+            <Icon name="trash alternate"/>
+          </Button.Content>
+          <Button.Content hidden>
+            Remove city from default
+          </Button.Content>
+        </Button>
+      </Card.Content>}
     </Card>
      ): (<Spinner size="huge" content="Fetching Data"/>);
 }
