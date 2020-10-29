@@ -1,0 +1,5 @@
+# Rewrite all requests to any file that doesn’t already exist to the index page, where router can handle it.
+
+
+/api/*  https://salty-coast-27242.herokuapp.com/:splat  200
+/* /index.html 200
