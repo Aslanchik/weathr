@@ -1,5 +1,4 @@
 import React, { useState,  useEffect} from 'react';
-import {Container} from "semantic-ui-react";
 
 import WeatherCard from "./WeatherCard"
 import {fetchWeather} from "../services/weatherSer";
