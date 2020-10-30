@@ -11,11 +11,8 @@ export const defaultReducer = (state, action) => {
       // Return initial state and add new default location to them
       return [...state, action.payload];
     case "REMOVE_DEFAULT_LOCATION":
-      console.log(action.payload);
-      console.log(state);
       // Remove default location from state
       const newState = state.filter((t) => t !== action.payload);
-      console.log(newState);
       // Change localstorage accordingly
       const localDefaultLocations = localStorage.getItem("defaultLocations");
       if (localDefaultLocations) {

@@ -16,7 +16,7 @@ const WeatherContextProvider = (props) => {
           .split(",");
         return storedDefaultLocations;
       } else {
-        const defaultLoc = ["Tel Aviv", "New York"];
+        const defaultLoc = ["Tel Aviv-Yafo", "New York"];
         localStorage.setItem("defaultLocations", defaultLoc);
         return defaultLoc;
       }
