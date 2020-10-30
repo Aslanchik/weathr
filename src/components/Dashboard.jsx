@@ -22,7 +22,7 @@ const Dashboard = () => {
                 </h1>
             </Grid.Row>
             <Grid.Row centered>
-                <Grid.Column width={12}>
+                <Grid.Column width={16}>
         <SearchBar setQuery={setQuery}/>
                 </Grid.Column>
             </Grid.Row>
