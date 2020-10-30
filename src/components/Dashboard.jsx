@@ -7,7 +7,7 @@ import MainWeatherCard from './MainWeatherCard';
 import DefaultWeatherCardWrapper from './DefaultWeatherCardWrapper';
 
 const Dashboard = () => {
-    const {defaultLocations, defaultDispatch, query, setQuery, fetching ,setFetching} = useContext(WeatherContext);
+    const {defaultLocations, defaultDispatch, query, setQuery} = useContext(WeatherContext);
 
     return ( <>
     <Container >
@@ -23,14 +23,12 @@ const Dashboard = () => {
             </Grid.Row>
             <Grid.Row centered>
                 <Grid.Column width={12}>
-        <SearchBar setQuery={setQuery} setFetching={setFetching}/>
+        <SearchBar setQuery={setQuery}/>
                 </Grid.Column>
             </Grid.Row>
             <Grid.Row centered>
-                    <Grid.Column largeScreen={8} widescreen={10} computer={8} tablet={8} mobile={12} className={fetching ? 'mainWeatherCard': ''}>
-                
-                <MainWeatherCard query={query} defaultDispatch={defaultDispatch} fetching={fetching} setFetching={setFetching}/> 
-                    
+                <Grid.Column className={query ? 'mainWeatherCard': ''} largeScreen={8} widescreen={10} computer={8} tablet={8} mobile={12}>
+                <MainWeatherCard query={query} defaultDispatch={defaultDispatch} /> 
                 </Grid.Column>
             </Grid.Row>
             <Grid.Row centered>

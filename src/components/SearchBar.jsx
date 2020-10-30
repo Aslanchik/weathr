@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import {Form, Button, Icon} from "semantic-ui-react";
 
-const SearchBar = ({setQuery, setFetching}) => {
+const SearchBar = ({setQuery}) => {
   const [inputVal, setInputVal] = useState('');
   const [errors, setErrors] = useState([]);
   const queryInputRef = useRef(null);
@@ -12,7 +12,6 @@ const SearchBar = ({setQuery, setFetching}) => {
     e.preventDefault();
     if(inputVal.trim === '') setErrors([...errors, 'Search value cannot be empty.']);
     if(!errors.length) {
-      setFetching(true);
       setQuery(inputVal);
       setInputVal('');
       queryInputRef.current.blur();

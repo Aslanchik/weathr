@@ -1,45 +1,51 @@
-import React, { useContext, useState } from 'react';
-import {Card, Image, Button, Icon, Popup, Accordion} from "semantic-ui-react"
+import React, { useContext, useEffect, useState } from 'react';
+import {Card, Image, Icon, Popup, Accordion} from "semantic-ui-react"
 
-import {WeatherContext} from "../context/weatherContext";
+import {WeatherContext} from "../../context/weatherContext";
+import {fetchWeather} from "../../services/weatherSer";
+import Spinner from '../../util/Spinner';
+import CardBtn from './CardBtn';
+import CardMisc from './CardMisc';
 
-const WeatherCard = ({locationWeather, mainWeatherCard = false}) => {
+const WeatherCard = ({location, mainWeatherCard = false}) => {
     const [celsius, setCelsius] = useState(true);
     const [accordActive, setAccordActive] = useState(false);
-    const {defaultDispatch, defaultLocations} = useContext(WeatherContext);
+    const [locationWeather, setLocationWeather] = useState();
+    const {locationsDispatch, defaultLocations} = useContext(WeatherContext);
+    
+    useEffect(()=>{
+      const fetchLocationWeather = async () =>{
+        try{
+          await fetchWeather(location).then(({data})=> {
+            setLocationWeather(data)
+          });
+        }catch(err){
+          console.log(err);
+        }
+        setTimeout(fetchLocationWeather, 300000)
+      }
+      fetchLocationWeather();
+    },[location]);
 
     const handleSaveLocation = () =>{
-      if(defaultLocations.length > 2){
+      const splitString = locationWeather.location.split(',');
+      if(defaultLocations.length === 2){
         alert('You can only have two default locations, remove one before adding another one.')
+      } else if(defaultLocations.includes(splitString[0])){
+        alert('This location is already a default location.')
       } else {
-        const splitString = locationWeather.location.split(',');
-        defaultDispatch({type:'ADD_DEFAULT', payload:splitString[0]})
+        locationsDispatch({type:'ADD_DEFAULT_LOCATION', payload:splitString[0]})
+
       };
     }
 
     const handleDeleteLocation = () =>{
       const splitString = locationWeather.location.split(',');
-      defaultDispatch({type:'REMOVE_DEFAULT', payload:splitString[0]});
+      locationsDispatch({type:'REMOVE_DEFAULT_LOCATION', payload:splitString[0]});
     }
 
-    const renderMisc = () =>{
-      return (
-        <>
-        <div className="miscField">
-                <span className="fieldTitle">Humidity</span>
-    <span className="fieldBody">{locationWeather.humidity}</span>
-            </div>
-            <div className="miscField">
-                <span className="fieldTitle">Percipitation</span>
-    <span className="fieldBody">{locationWeather.percipitation}</span>
-            </div>
-            <div className="miscField">
-                <span className="fieldTitle">Wind</span>
-    <span className="fieldBody">{locationWeather.wind}</span>
-            </div>
-            </>
-      )
-    }
+
+    
 
     const renderWeatherCard = () =>{
       return (
@@ -71,7 +77,7 @@ const WeatherCard = ({locationWeather, mainWeatherCard = false}) => {
         </div>
     </Card.Description>
         <Card.Description className="desktopMisc">
-            {renderMisc()}
+            <CardMisc locationWeather={locationWeather}/>
         </Card.Description>
         <Card.Description className="mobileMisc" >
           <Accordion>
@@ -80,35 +86,23 @@ const WeatherCard = ({locationWeather, mainWeatherCard = false}) => {
               More Information
             </Accordion.Title>
           <Accordion.Content active={accordActive}>
-            {renderMisc()}
+            <CardMisc locationWeather={locationWeather}/>
         </Accordion.Content>
           </Accordion>
         </Card.Description>
       </Card.Content>
-      {mainWeatherCard ? (<Card.Content extra>
-        <Button className="saveBtn" animated fluid onClick={handleSaveLocation}>
-          <Button.Content visible>
-            <Icon name="heart"/>
-          </Button.Content>
-          <Button.Content hidden>
-            Save Location to default
-          </Button.Content>
-        </Button>
-      </Card.Content>): (<Card.Content extra>
-        <Button className="removeBtn" animated fluid onClick={handleDeleteLocation}>
-          <Button.Content visible>
-            <Icon name="trash alternate"/>
-          </Button.Content>
-          <Button.Content hidden>
-            Remove Location from default
-          </Button.Content>
-        </Button>
-      </Card.Content>)}
+      <Card.Content extra>
+      {mainWeatherCard ? (
+        <CardBtn className='saveBtn' icon="heart" content="Save Location to default" callback={handleSaveLocation}/>
+      ): (
+        <CardBtn className='removeBtn' icon="trash alternate" content="Remove Location from default" callback={handleDeleteLocation}/>
+      )}
+      </Card.Content>
     </Card>
       )
     }
 
-    return locationWeather ? renderWeatherCard() : null;
+    return locationWeather ? renderWeatherCard() : <Spinner/>;
 }
  
 export default WeatherCard;
