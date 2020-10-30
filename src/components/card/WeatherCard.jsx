@@ -41,6 +41,7 @@ const WeatherCard = ({location, mainWeatherCard = false}) => {
 
     const handleDeleteLocation = () =>{
       const splitString = locationWeather.location.split(',');
+      console.log(splitString[0])
       locationsDispatch({type:'REMOVE_DEFAULT_LOCATION', payload:splitString[0]});
     }
 
