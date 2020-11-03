@@ -58,6 +58,7 @@ body {
 .socialIconsWrapper {
   position: fixed;
   bottom: 0;
+  z-index: -20;
   .socialIcons {
     font-size: 3rem;
     color: $DARK_BLUE;
