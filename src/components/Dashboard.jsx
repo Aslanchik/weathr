@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import {Container, Grid} from "semantic-ui-react";
+import {Container, Grid, Icon} from "semantic-ui-react";
 
 import SearchBar from "./SearchBar";
 import {WeatherContext} from "../context/weatherContext";
@@ -36,6 +36,13 @@ const Dashboard = () => {
             </Grid.Row>
             <Grid.Row centered>
     <DefaultWeatherCardWrapper defaultLocations={defaultLocations} defaultDispatch={defaultDispatch}/>
+            </Grid.Row>
+            <Grid.Row centered>
+                <div className="socialIconsWrapper">
+
+                <a className="socialIcons" href="https://github.com/Aslanchik/weathr" rel="noreferrer" target="_blank"><Icon name="github"/></a>
+                <a className="socialIcons" href="https://www.linkedin.com/in/aslan-badalov" rel="noreferrer" target="_blank"><Icon name="linkedin"/></a>
+                </div>
             </Grid.Row>
         </Grid>
     </Container></> );

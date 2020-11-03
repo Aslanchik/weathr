@@ -54,3 +54,15 @@ body {
 .mobileMisc {
   display: block;
 }
+
+.socialIconsWrapper {
+  position: fixed;
+  bottom: 0;
+  .socialIcons {
+    font-size: 3rem;
+    color: $DARK_BLUE;
+    &:hover {
+      color: $BLUE;
+    }
+  }
+}
